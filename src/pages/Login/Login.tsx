@@ -1,72 +1,37 @@
-import React, { useState } from 'react';
+import { memo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { validatePassword } from '../../utils/validation';
-import '../../styles/login.scss';
+//bootstrap
+import { Form, Button } from 'react-bootstrap';
+//icons
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+//img
 import loginPageImage from '../../assests/images/loginPageImage.png';
+//style
+import '../../styles/login.scss';
+
+type LoginFormInputs = {
+  username: string;
+  password: string;
+  keepSignedIn: boolean;
+};
 
 const Login = () => {
+  
   const navigate = useNavigate();
-  
-  const [formData, setFormData] = useState({ username: '', password: '', keepSignedIn: false});
-  
-  const [errors, setErrors] = useState<{
-    username?: string;
-    password?: string[];
-    general?: string;
-  }>({});
-  
-  const [touched, setTouched] = useState({
-    username: false,
-    password: false
-  });
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-    
-    // Clear errors when user starts typing
-    if (errors[name as keyof typeof errors]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: undefined
-      }));
-    }
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch
+  } = useForm<LoginFormInputs>();
 
-  const handleBlur = (field: string) => {
-    setTouched(prev => ({
-      ...prev,
-      [field]: true
-    }));
-  };
+  const passwordValue = watch('password');
 
-  const validateForm = () => {
-    const newErrors: typeof errors = {};
-    
-    // Username validation
-    if (!formData.username.trim()) {
-      newErrors.username = 'Username is required';
-    }
-    
-    // Password validation
-    const passwordValidation = validatePassword(formData.password);
-    if (!passwordValidation.isValid) {
-      newErrors.password = passwordValidation.errors;
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validateForm()) {
-      navigate('/home');
-    }
+  const onSubmit = (data: LoginFormInputs) => {
+    navigate('/home');
   };
 
   return (
@@ -74,57 +39,72 @@ const Login = () => {
       <div className="login-container">
         <div className="form-wrapper">
           <h2>Sign In</h2>
-          <p>
-            New user? <a href="/signup">Create an account</a>
-          </p>
-          
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username or email"
-              value={formData.username}
-              onChange={handleInputChange}
-              onBlur={() => handleBlur('username')}
-              className={touched.username && errors.username ? 'error' : ''}
-            />
-            {touched.username && errors.username && (
-              <div className="error-message">{errors.username}</div>
-            )}
-            
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
-              onBlur={() => handleBlur('password')}
-              className={touched.password && errors.password ? 'error' : ''}
-            />
-            {touched.password && errors.password && (
-              <div className="error-messages">
-                {errors.password.map((error, index) => (
-                  <div key={index} className="error-message">{error}</div>
-                ))}
-              </div>
-            )}
-            
-            <div className="keep-signed-in">
-              <input
-                type="checkbox"
-                id="keepSignedIn"
-                name="keepSignedIn"
-                checked={formData.keepSignedIn}
-                onChange={handleInputChange}
+          <p>New user? <a href="/signup">Create an account</a></p>
+
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Group controlId="formUsername">
+              <Form.Control
+                type="text"
+                placeholder="Username or email"
+                isInvalid={!!errors.username}
+                className={errors.username ? 'error' : ''}
+                {...register('username', { required: 'Username is required' })}
               />
-              <label htmlFor="keepSignedIn">Keep me signed in</label>
-            </div>
-            
-            <button type="submit" className="signin-btn">Sign In</button>
-          </form>
+              {errors.username && (
+                <div className="error-message">{errors.username.message}</div>
+              )}
+            </Form.Group>
 
-          <div className="divider">Or Sign In With</div>
+            <Form.Group controlId="formPassword" className="mt-3 password-group">
+              <div className="password-input-wrapper">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  isInvalid={!!errors.password}
+                  className={errors.password ? 'error' : ''}
+                  {...register('password', {
+                    required: 'Password is required',
+                    validate: (value) => {
+                      const errs: string[] = [];
+                      if (value.length < 8) errs.push('Min 8 characters');
+                      if (!/[A-Z]/.test(value)) errs.push('1 capital letter');
+                      if (!/\d/.test(value)) errs.push('1 number');
+                      if (!/[^A-Za-z0-9]/.test(value)) errs.push('1 special character');
+                      return errs.length ? errs.join(', ') : true;
+                    }
+                  })}
+                />
+                {passwordValue && (
+                  <span
+                    className={`password-toggle-icon${errors.password ? ' error' : ''}`}
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                  </span>
+                )}
+              </div>
+              {errors.password && (
+                <div className="error-message">{errors.password.message as string}</div>
+              )}
+            </Form.Group>
 
+            <Form.Group controlId="formKeepSignedIn" className="mt-3 keep-signed-in">
+              <Form.Check
+                type="checkbox"
+                label="Keep me signed in"
+                {...register('keepSignedIn')}
+              />
+            </Form.Group>
+
+            <Button type="submit" className="signin-btn mt-3" variant="primary">
+              Sign In
+            </Button>
+          </Form>
+
+          <div className="divider mt-4">Or Sign In With</div>
           <div className="social-icons">
             <button type="button"><i className="fab fa-google"></i></button>
             <button type="button"><i className="fab fa-facebook-f"></i></button>
@@ -141,4 +121,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default memo(Login);

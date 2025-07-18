@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-width: 100vw;
   background-color: #fff;
   padding: 2rem;
 
@@ -47,7 +48,6 @@
       border: 2px solid #333; // bold border
       border-radius: 0;
       font-size: 0.9rem;
-      
       &.error {
         border-color: #dc3545;
       }
@@ -93,28 +93,27 @@
     }
 
     .divider {
+      display: flex;
+      align-items: center;
       text-align: center;
-      font-size: 0.8rem;
-      margin: 1.2rem 0;
-      position: relative;
       color: #666;
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin: 1.2rem 0;
+
+      span {
+        padding: 0 1rem;
+        background: #fff;
+        z-index: 1;
+      }
 
       &::before,
       &::after {
         content: "";
-        position: absolute;
-        top: 50%;
-        width: 40%;
+        flex: 1;
         height: 1px;
         background: #ccc;
-      }
-
-      &::before {
-        left: 0;
-      }
-
-      &::after {
-        right: 0;
+        display: block;
       }
     }
 
@@ -159,4 +158,98 @@
       width: auto;
     }
   }
+}
+
+// Responsive design for smaller screens
+@media (max-width: 900px) {
+  .login-page {
+    justify-content: center;
+  }
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    gap: 2rem;
+  }
+  .form-wrapper {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  .illustration-wrapper {
+    display: none !important;
+  }
+  .form-wrapper {
+    text-align: center;
+  }
+  .form-wrapper h2,
+  .form-wrapper p,
+  .form-wrapper form {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .form-wrapper {
+    max-width: 95vw;
+    padding: 0 2vw;
+  }
+  .social-icons {
+    gap: 0.5rem;
+    button {
+      width: 36px;
+      height: 36px;
+      padding: 8px;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input[type='password'],
+  input[type='text'] {
+    width: 100%;
+    padding-right: 2.5rem;
+    box-sizing: border-box;
+  }
+
+  .password-toggle-icon {
+    position: absolute;
+    right: 1.85rem;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    font-size: 1.25rem;
+    z-index: 2;
+    transition: color 0.2s;
+    display: flex;
+    &:hover {
+      color: #333;
+    }
+    &.error {
+      color: #dc3545;
+    }
+  }
+}
+
+// Hide browser built-in password reveal (eye) icon for password fields
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-input-password-reveal-button {
+  display: none !important;
+}
+
+input[type="password"]::-webkit-input-password-reveal {
+  display: none !important;
 }

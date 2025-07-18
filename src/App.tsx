@@ -5,6 +5,7 @@ import { store } from './store/store';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import './App.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   return (

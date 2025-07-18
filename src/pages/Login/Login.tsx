@@ -17,7 +17,7 @@ type LoginFormInputs = {
 };
 
 const Login = () => {
-  
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -39,7 +39,7 @@ const Login = () => {
       <div className="login-container">
         <div className="form-wrapper">
           <h2>Sign In</h2>
-          <p>New user? <a href="/signup">Create an account</a></p>
+          <p>New user? <a>Create an account</a></p>
 
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group controlId="formUsername">

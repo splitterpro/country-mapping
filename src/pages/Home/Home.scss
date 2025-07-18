@@ -74,46 +74,6 @@
   }
 }
 
-.red-wavy-line {
-  height: 4px;
-  background: linear-gradient(90deg, #ff0000 0%, #ff3333 50%, #ff0000 100%);
-  margin: 0;
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: inherit;
-    clip-path: polygon(
-      0% 50%,
-      5% 30%,
-      10% 70%,
-      15% 40%,
-      20% 60%,
-      25% 35%,
-      30% 65%,
-      35% 45%,
-      40% 55%,
-      45% 25%,
-      50% 75%,
-      55% 30%,
-      60% 70%,
-      65% 40%,
-      70% 60%,
-      75% 35%,
-      80% 65%,
-      85% 45%,
-      90% 55%,
-      95% 25%,
-      100% 50%
-    );
-  }
-}
-
 .welcome-section {
   display: flex;
   flex-direction: column;
@@ -272,31 +232,6 @@
     .frame-placeholder {
       color: #666;
       
-      .placeholder-shapes {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: center;
-        margin-bottom: 1rem;
-        
-        .shape {
-          width: 20px;
-          height: 20px;
-          background: #333;
-          
-          &.triangle {
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-          }
-          
-          &.square {
-            border-radius: 0;
-          }
-          
-          &.circle {
-            border-radius: 50%;
-          }
-        }
-      }
-      
       p {
         margin: 0;
         font-size: 1rem;
@@ -304,6 +239,13 @@
       }
     }
   }
+}
+
+.frame-image {
+  max-width: 100%;
+  max-height: 120px;
+  display: block;
+  margin: 0 auto;
 }
 
 .country-card {
@@ -426,6 +368,28 @@
     font-size: 0.9rem;
     margin: 0;
   }
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.loading-spinner:after {
+  content: '';
+  width: 48px;
+  height: 48px;
+  border: 6px solid #ccc;
+  border-top: 6px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 // Responsive design

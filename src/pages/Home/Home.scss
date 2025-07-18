@@ -1,0 +1,583 @@
+.home-page {
+  min-height: 100vh;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.home-header {
+  background-color: #fff;
+  padding: 2rem 0;
+  
+  .site-title {
+    margin: 0;
+    color: #333;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  .filter-section {
+    display: flex;
+    gap: 3rem;
+    
+    .filter-option {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      color: #666;
+      cursor: pointer;
+      padding: 0.75rem 0;
+      position: relative;
+      transition: color 0.2s ease;
+      font-weight: 400;
+      
+      &:hover {
+        color: #333;
+      }
+      
+      &.active {
+        color: #333;
+        font-weight: 600;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background-color: #333;
+        }
+      }
+    }
+  }
+  
+  .hamburger-menu {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    span {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    &:hover span {
+      background-color: #666;
+    }
+  }
+}
+
+.red-wavy-line {
+  height: 4px;
+  background: linear-gradient(90deg, #ff0000 0%, #ff3333 50%, #ff0000 100%);
+  margin: 0;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: inherit;
+    clip-path: polygon(
+      0% 50%,
+      5% 30%,
+      10% 70%,
+      15% 40%,
+      20% 60%,
+      25% 35%,
+      30% 65%,
+      35% 45%,
+      40% 55%,
+      45% 25%,
+      50% 75%,
+      55% 30%,
+      60% 70%,
+      65% 40%,
+      70% 60%,
+      75% 35%,
+      80% 65%,
+      85% 45%,
+      90% 55%,
+      95% 25%,
+      100% 50%
+    );
+  }
+}
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 4rem 0;
+  position: relative;
+  
+  .welcome-line {
+    height: 6px;
+    background-color: #333;
+    width: 300px;
+    position: absolute;
+    
+    &.left {
+      top: -1rem;
+      right: 50%;
+      margin-right: 12rem;
+    }
+    
+    &.right {
+      bottom: -2rem;
+      left: 50%;
+      margin-left: 11rem;
+    }
+  }
+  
+  .welcome-title {
+    margin: -30px;
+    color: #333;
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    white-space: nowrap;
+    z-index: 1;
+  }
+}
+
+.main-slider {
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  height: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  
+  .slider-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .slider-content {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      
+      .slider-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &.active {
+          opacity: 1;
+        }
+        
+        .slider-image-placeholder {
+          width: 200px;
+          height: 200px;
+          background: #e0e0e0;
+          border: 1px solid #ccc;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
+          
+          .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+  
+  .slider-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    
+    .slider-nav {
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid #ccc;
+      color: #333;
+      
+      &:hover {
+        background: #f0f0f0;
+      }
+    }
+    
+    .slider-dots {
+      display: flex;
+      gap: 0.5rem;
+      
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: none;
+        background: #e0e0e0;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        
+        &.active {
+          background: #333;
+        }
+        
+        &:hover {
+          background: #ccc;
+        }
+      }
+    }
+  }
+}
+
+.side-frame {
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .frame-content {
+    text-align: center;
+    
+    .frame-placeholder {
+      color: #666;
+      
+      .placeholder-shapes {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-bottom: 1rem;
+        
+        .shape {
+          width: 20px;
+          height: 20px;
+          background: #333;
+          
+          &.triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+          }
+          
+          &.square {
+            border-radius: 0;
+          }
+          
+          &.circle {
+            border-radius: 50%;
+          }
+        }
+      }
+      
+      p {
+        margin: 0;
+        font-size: 1rem;
+        color: #666;
+      }
+    }
+  }
+}
+
+.country-card {
+  background-color: #fff;
+  border: 2px solid #bdbdbd;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+
+  .flag-container {
+    width: 120px;
+    height: 120px;
+    min-width: 120px;
+    min-height: 120px;
+    max-width: 120px;
+    max-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    padding: 0;
+    flex-shrink: 0;
+    margin: 1.25rem 0 1.25rem 1.25rem;
+    border-radius: 8px;
+
+    .country-flag {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #f5f5f5;
+    }
+  }
+
+  .card-body {
+    padding: 1.25rem 1.25rem 1.25rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    flex: 1;
+  }
+
+  .country-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .country-region {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.load-more-btn {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  border-radius: 4px;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+}
+
+.home-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  padding: 3rem 0 2rem;
+  margin-top: 4rem;
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid #333;
+      background: transparent;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background: #333;
+        color: #fff;
+      }
+    }
+  }
+  
+  .contact-email {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .copyright {
+    color: #999;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .home-header {
+    padding: 1rem 0;
+    
+    .filter-section {
+      gap: 1rem;
+      
+      .filter-option {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  
+  .welcome-section {
+    margin: 3rem 0;
+    
+    .welcome-title {
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+    }
+    
+    .welcome-line {
+      width: 200px;
+      height: 5px;
+      
+      &.left {
+        top: -1.5rem;
+        margin-right: 1.5rem;
+      }
+      
+      &.right {
+        bottom: -1.5rem;
+        margin-left: 1.5rem;
+      }
+    }
+  }
+  
+  .main-slider {
+    padding: 1rem;
+    height: 300px;
+    
+    .slider-wrapper {
+      .slider-content {
+        .slider-item {
+          .slider-image-placeholder {
+            width: 150px;
+            height: 150px;
+          }
+        }
+      }
+    }
+  }
+  
+  .side-frame {
+    height: 300px;
+    margin-top: 1rem;
+  }
+  
+  .country-card {
+    .flag-container {
+      width: 100px;
+      height: 100px;
+      min-width: 100px;
+      min-height: 100px;
+      max-width: 100px;
+      max-height: 100px;
+      margin: 1rem 0 1rem 1rem;
+      border-radius: 7px;
+    }
+  }
+  
+  .home-footer {
+    padding: 2rem 0 1rem;
+    
+    .social-icons {
+      gap: 0.5rem;
+      
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .welcome-section {
+    flex-direction: column;
+    gap: 1.5rem;
+    
+    .welcome-title {
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+    
+    .welcome-line {
+      width: 150px;
+      height: 4px;
+      
+      &.left {
+        top: -1rem;
+        margin-right: 1rem;
+      }
+      
+      &.right {
+        bottom: -1rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+  
+  .main-slider {
+    height: 250px;
+    
+    .slider-wrapper {
+      .slider-content {
+        .slider-item {
+          .slider-image-placeholder {
+            width: 120px;
+            height: 120px;
+          }
+        }
+      }
+    }
+  }
+  
+  .country-card {
+    .flag-container {
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
+      min-height: 80px;
+      max-width: 80px;
+      max-height: 80px;
+      margin: 0.75rem 0 0.75rem 0.75rem;
+      border-radius: 6px;
+    }
+    
+    .card-body {
+      padding: 0.75rem;
+    }
+    
+    .country-name {
+      font-size: 1rem;
+    }
+    
+    .country-region {
+      font-size: 0.8rem;
+    }
+  }
+} 

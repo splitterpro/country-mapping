@@ -1,46 +1,118 @@
-# Getting Started with Create React App
+# Country Mapping Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application that displays countries with their flags and regions, featuring a login page with form validation and a home page with interactive features.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Login Page
+- Clean, responsive design matching the provided mockup
+- Form validation with password requirements:
+  - Minimum 8 characters
+  - At least 1 capital letter
+  - At least 1 number
+  - At least 1 symbol
+- Redux state management for authentication
+- Navigation to home page on successful login
 
-### `npm start`
+### Home Page
+- **Countries Display**: Lists all countries with flags and regions
+- **Interactive Slider**: Features 5 countries with next/previous navigation and dots
+- **Region Filtering**: Filter countries by continent/region
+- **Load More Pagination**: Progressive loading of countries
+- **Responsive Design**: Works on all device sizes
+- **Logout Functionality**: Return to login page
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Technical Features
+- **Redux Toolkit**: State management for authentication and countries data
+- **React Bootstrap**: UI components and responsive design
+- **TypeScript**: Type-safe development
+- **SCSS**: Advanced styling with variables and mixins
+- **React Router**: Navigation between pages
+- **API Integration**: Fetches data from REST Countries API
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- React 19.1.0
+- TypeScript 4.9.5
+- Redux Toolkit 2.8.2
+- React Bootstrap 2.10.10
+- React Router DOM 7.7.0
+- SCSS for styling
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm or yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd country-mapping
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
+```bash
+npm install
+```
 
-### `npm run eject`
+3. Start the development server:
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Available Scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (not recommended)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Project Structure
 
-## Learn More
+```
+src/
+├── components/          # Reusable components
+├── pages/              # Page components
+│   ├── Login/          # Login page
+│   └── Home/           # Home page
+├── store/              # Redux store
+│   ├── slices/         # Redux slices
+│   └── hooks.ts        # Typed Redux hooks
+├── styles/             # SCSS styles
+├── utils/              # Utility functions
+└── assests/            # Static assets
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## API Integration
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application uses the [REST Countries API](https://restcountries.com/) to fetch country data:
+- Endpoint: `https://restcountries.com/v2/all?fields=name,region,flag`
+- Returns: Country name, region, and flag URL
+
+## Deployment
+
+The application can be deployed to any static hosting service:
+
+1. Build the production version:
+```bash
+npm run build
+```
+
+2. Deploy the `build` folder to your preferred hosting service (Vercel, Netlify, etc.)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.

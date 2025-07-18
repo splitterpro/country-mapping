@@ -11,8 +11,9 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../store/hooks';
 import { fetchCountries, setCountries } from '../../store/slices/countriesSlice';
 
+// Main Home page component for displaying countries and slider
 const Home = () => {
-
+  // State for slider, pagination, and country data
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentPage, setCurrenPage] = useState(1);
   const [coutryListInfo, setCountryListInfo] = useState<any>([]);
@@ -22,18 +23,20 @@ const Home = () => {
   const dispatch = useDispatch<any>();
   const countries  = useAppSelector((state: any) => state.countries.countries);
 
+  // Calculate displayed countries and pagination
   const displayedCountries = coutryListInfo?.length && coutryListInfo?.slice(0, currentPage * 12);
   const hasMore = displayedCountries.length < coutryListInfo?.length;
 
+  // Fetch countries on mount
   useEffect(() => {
-    dispatch(fetchCountries());
     setLoading(true);
+    dispatch(fetchCountries());
     return (() => {
       dispatch(setCountries([]));
     })
-
   }, []);
 
+  // Update country list and loading state when countries change
   useEffect(() => {
     if (countries?.length) {
       setCountryListInfo(countries);
@@ -41,6 +44,7 @@ const Home = () => {
     }
   }, [countries]);
 
+  // Handle region filter change
   const handleRegionChange = (region: string) => {
     if (region && countries?.length) {
       let updatedCountryInfo = region === "All" ? countries : countries?.filter((item: any) => item?.region === region);
@@ -51,6 +55,7 @@ const Home = () => {
     }
   };
 
+  // Handle slider navigation (next, previous, select)
   const handleImageSlider = useCallback((styleDirection: string, index?: number) => {
     setCurrentSlide(prev => {
       const totalSlides = Math.min(4, coutryListInfo?.length || 0);
